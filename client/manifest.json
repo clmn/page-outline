@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "PageOutliner",
+  "version": "1.0.0",
+  "description": "Automatically generates a clickable table of contents from H1-H4 headings on any webpage",
+  "icons": {
+    "16": "https://fonts.gstatic.com/s/i/materialicons/toc/v14/24px.svg",
+    "48": "https://fonts.gstatic.com/s/i/materialicons/toc/v14/24px.svg",
+    "128": "https://fonts.gstatic.com/s/i/materialicons/toc/v14/24px.svg"
+  },
+  "action": {
+    "default_popup": "public/index.html",
+    "default_icon": {
+      "16": "https://fonts.gstatic.com/s/i/materialicons/toc/v14/24px.svg",
+      "48": "https://fonts.gstatic.com/s/i/materialicons/toc/v14/24px.svg",
+      "128": "https://fonts.gstatic.com/s/i/materialicons/toc/v14/24px.svg"
+    }
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "contextMenus"
+  ],
+  "background": {
+    "service_worker": "public/background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["public/content.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["public/index.html"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}
